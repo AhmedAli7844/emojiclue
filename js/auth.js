@@ -135,14 +135,6 @@ function renderAuthView(view) {
       Continue with Google
     </button>
 
-    <button class="auth-social-btn apple-btn" onclick="handleAppleSignIn()">
-      <svg width="14" height="17" viewBox="0 0 14 17" fill="none">
-        <path d="M11.76 9.05c-.02-2.18 1.78-3.23 1.86-3.28-1.02-1.49-2.59-1.69-3.14-1.71-1.33-.14-2.6.79-3.28.79-.67 0-1.7-.77-2.8-.75C2.88 4.12 1.33 5.1.48 6.62c-1.74 3.01-.45 7.47 1.25 9.91.83 1.2 1.82 2.55 3.12 2.5 1.25-.05 1.73-.81 3.24-.81 1.51 0 1.94.81 3.26.79 1.35-.02 2.2-1.22 3.02-2.43.96-1.39 1.35-2.74 1.37-2.81-.03-.01-2.62-1.01-2.65-3.72h-.01z" fill="white"/>
-        <path d="M9.49 2.18c.69-.84 1.15-2 1.02-3.18-.99.04-2.18.66-2.89 1.49-.63.73-1.19 1.9-1.04 3.02 1.11.09 2.23-.56 2.91-1.33z" fill="white"/>
-      </svg>
-      Continue with Apple
-    </button>
-
     <div class="auth-divider"><span>or</span></div>
 
     ${isSignUp ? `
@@ -250,21 +242,6 @@ async function handleGoogleSignIn() {
   }
   const provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({ prompt: "select_account" });
-  try {
-    await auth.signInWithPopup(provider);
-  } catch (e) {
-    if (e.code !== "auth/popup-closed-by-user") showAuthError(friendlyError(e.code));
-  }
-}
-
-// ─── Apple Sign In ────────────────────────────────────────────────────────────
-async function handleAppleSignIn() {
-  if (!FIREBASE_CONFIGURED) {
-    return showAuthError("Apple sign-in requires Firebase setup. Use test@bigzy.com / Test1234 for now.");
-  }
-  const provider = new firebase.auth.OAuthProvider("apple.com");
-  provider.addScope("email");
-  provider.addScope("name");
   try {
     await auth.signInWithPopup(provider);
   } catch (e) {
