@@ -1,0 +1,318 @@
+/* BIGZY Games — Auth Modal Styles */
+
+/* ── Auth overlay ────────────────────────────────────────────────────────── */
+#auth-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 200;
+  animation: auth-fade 0.3s ease;
+}
+#auth-modal.hidden { display: none; }
+
+@keyframes auth-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Auth card ───────────────────────────────────────────────────────────── */
+.auth-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 32px 28px;
+  width: 100%;
+  max-width: 400px;
+  animation: auth-slide 0.3s ease;
+}
+
+@keyframes auth-slide {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Auth header ─────────────────────────────────────────────────────────── */
+.auth-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.auth-logo img { width: 36px; height: 36px; }
+.auth-logo-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+
+.auth-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.auth-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+.auth-tabs {
+  display: flex;
+  gap: 0;
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  margin-bottom: 22px;
+}
+
+.auth-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 9px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.auth-tab.active {
+  background: var(--surface3);
+  color: var(--text);
+}
+
+/* ── Social buttons ──────────────────────────────────────────────────────── */
+.auth-social-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  margin-bottom: 10px;
+}
+.auth-social-btn:active { transform: scale(0.98); }
+
+.google-btn {
+  background: var(--surface2);
+  color: var(--text);
+}
+.google-btn:hover { background: var(--surface3); border-color: var(--border-light); }
+
+.apple-btn {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #333;
+}
+.apple-btn:hover { background: #222; border-color: #444; }
+
+/* ── Divider ─────────────────────────────────────────────────────────────── */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Fields ──────────────────────────────────────────────────────────────── */
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.auth-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.auth-field input {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.auth-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.auth-field input::placeholder { color: var(--text-muted); opacity: 0.6; }
+
+/* ── Primary button ──────────────────────────────────────────────────────── */
+.auth-primary-btn {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 4px;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+  letter-spacing: 0.02em;
+}
+.auth-primary-btn:hover:not(:disabled) {
+  background: var(--accent-h);
+  box-shadow: 0 4px 22px rgba(16, 185, 129, 0.5);
+}
+.auth-primary-btn:active:not(:disabled) { transform: scale(0.98); }
+.auth-primary-btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+
+/* ── Text button (forgot password / back) ────────────────────────────────── */
+.auth-text-btn {
+  background: none;
+  border: none;
+  color: var(--accent-h);
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 4px 0;
+  display: block;
+  width: 100%;
+  transition: color 0.15s;
+}
+.auth-text-btn:hover { color: var(--text); }
+
+/* ── Error / success message ─────────────────────────────────────────────── */
+#auth-error {
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 10px 13px;
+  border-radius: var(--radius-xs);
+  margin-bottom: 14px;
+  text-align: center;
+}
+#auth-error.hidden { display: none; }
+#auth-error.error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+#auth-error.success {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #86efac;
+}
+
+/* ── Terms ───────────────────────────────────────────────────────────────── */
+.auth-terms {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* ── User dropdown (header) ──────────────────────────────────────────────── */
+.user-dropdown {
+  position: absolute;
+  top: 56px;
+  right: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  z-index: 150;
+  min-width: 180px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: auth-slide 0.2s ease;
+}
+.user-dropdown.hidden { display: none; }
+
+.dropdown-email {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 8px 12px 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 12px;
+  text-align: left;
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.dropdown-btn:hover { background: var(--surface2); }
+.dropdown-btn.danger { color: #fca5a5; }
+
+/* ── Skip button ─────────────────────────────────────────────────────────── */
+.auth-skip-btn {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 14px 0 2px;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.15s;
+}
+.auth-skip-btn:hover { opacity: 0.7; }
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 28px 20px 24px;
+  }
+}

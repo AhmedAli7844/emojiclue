@@ -1,0 +1,150 @@
+/* BIGZY Games — Intro / Splash Screen */
+
+#intro-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 500;
+  animation: intro-in 0.5s ease both;
+}
+
+@keyframes intro-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#intro-screen.fade-out {
+  animation: intro-out 0.55s ease forwards;
+}
+
+@keyframes intro-out {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.04); }
+}
+
+/* ── Content ─────────────────────────────────────────────────────────────── */
+.intro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  animation: intro-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Logo row ────────────────────────────────────────────────────────────── */
+.intro-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  opacity: 0.6;
+}
+
+.intro-logo img {
+  width: 28px;
+  height: 28px;
+}
+
+.intro-logo span {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Cycling emoji ───────────────────────────────────────────────────────── */
+.intro-emojis {
+  font-size: clamp(4rem, 18vw, 7rem);
+  line-height: 1;
+  margin-bottom: 28px;
+  transition: opacity 0.2s, transform 0.2s;
+  letter-spacing: 0.08em;
+  filter: drop-shadow(0 0 40px rgba(16, 185, 129, 0.3));
+}
+
+.intro-emojis.swap {
+  opacity: 0;
+  transform: scale(0.88) translateY(8px);
+}
+
+/* ── Title ───────────────────────────────────────────────────────────────── */
+.intro-title {
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+
+/* ── Subtitle ────────────────────────────────────────────────────────────── */
+.intro-sub {
+  font-size: clamp(0.88rem, 2.5vw, 1rem);
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 380px;
+  margin-bottom: 40px;
+}
+
+/* ── Play button ─────────────────────────────────────────────────────────── */
+.intro-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 36px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 6px 28px rgba(16, 185, 129, 0.45);
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+  margin-bottom: 20px;
+}
+
+.intro-play-btn:hover {
+  background: var(--accent-h);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(16, 185, 129, 0.55);
+}
+
+.intro-play-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.intro-play-btn svg {
+  transition: transform 0.15s;
+}
+
+.intro-play-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* ── Streak / welcome text ───────────────────────────────────────────────── */
+.intro-streak {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  min-height: 20px;
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .intro-logo { margin-bottom: 28px; }
+  .intro-sub  { margin-bottom: 32px; }
+  .intro-play-btn { padding: 14px 28px; }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 44" fill="none">
+  <!-- Emoji bubble icon -->
+  <rect x="0" y="4" width="36" height="36" rx="9" fill="#538d4e"/>
+  <!-- Smile face -->
+  <circle cx="13.5" cy="19" r="2.2" fill="white"/>
+  <circle cx="22.5" cy="19" r="2.2" fill="white"/>
+  <path d="M12 25 Q18 30 24 25" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Little tail on bubble -->
+  <path d="M8 40 L14 36 H4 Z" fill="#538d4e"/>
+
+  <!-- BIGZY text -->
+  <text x="46" y="26" font-family="'Inter', 'Arial Black', 'Helvetica Neue', sans-serif"
+        font-size="20" font-weight="800" fill="white" letter-spacing="0.5">BIGZY</text>
+
+  <!-- GAMES sub-label -->
+  <text x="47" y="38" font-family="'Inter', 'Arial', sans-serif"
+        font-size="8.5" font-weight="500" fill="#818384" letter-spacing="2.5">GAMES</text>
+</svg>

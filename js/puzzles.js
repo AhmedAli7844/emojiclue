@@ -1,0 +1,754 @@
+// BIGZY Games — Daily Emoji Puzzle
+// Puzzle database: each entry has emojis, answer, category, and progressive hints
+
+const PUZZLES = [
+  // ── MOVIES ──────────────────────────────────────────────────────────────
+  {
+    emojis: "🦁 👑",
+    answer: "The Lion King",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Disney film",
+      "Released in 1994",
+      "A young prince must reclaim his kingdom",
+      "First word: 'The'",
+    ],
+  },
+  {
+    emojis: "🕷️ 👦",
+    answer: "Spider-Man",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Marvel superhero film",
+      "The hero can climb walls",
+      "He swings through New York City",
+      "One word, two parts",
+    ],
+  },
+  {
+    emojis: "🧙 💍",
+    answer: "The Lord of the Rings",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Epic fantasy trilogy",
+      "Based on J.R.R. Tolkien's novel",
+      "Set in Middle-earth",
+      "First word: 'The'",
+    ],
+  },
+  {
+    emojis: "🦈 🌊",
+    answer: "Jaws",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Classic 1975 thriller",
+      "Directed by Steven Spielberg",
+      "Set in a beach town called Amity",
+      "One word, four letters",
+    ],
+  },
+  {
+    emojis: "🚂 ⛄ 🎁",
+    answer: "The Polar Express",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Christmas film",
+      "A boy boards a magical train",
+      "Destination: North Pole",
+      "First word: 'The'",
+    ],
+  },
+  {
+    emojis: "🐠 🔍",
+    answer: "Finding Nemo",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Pixar film",
+      "Set mostly underwater",
+      "A father searches for his lost son",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🚀 👨‍🚀 🪐",
+    answer: "Interstellar",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Directed by Christopher Nolan",
+      "Involves travelling through a wormhole",
+      "Stars Matthew McConaughey",
+      "One word, eleven letters",
+    ],
+  },
+  {
+    emojis: "🧊 ❄️ 👸",
+    answer: "Frozen",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Disney film",
+      "Features the song 'Let It Go'",
+      "Two sisters, one with ice powers",
+      "One word",
+    ],
+  },
+  {
+    emojis: "🤖 🚗",
+    answer: "Transformers",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Based on the toy franchise",
+      "Alien robots disguise as vehicles",
+      "Directed by Michael Bay (2007)",
+      "One word",
+    ],
+  },
+  {
+    emojis: "👻 🏚️",
+    answer: "Ghostbusters",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Classic 1984 comedy",
+      "A team hunts paranormal entities in NYC",
+      "Famous catchphrase: 'Who ya gonna call?'",
+      "One word",
+    ],
+  },
+
+  // ── MORE POPULAR MOVIES ──────────────────────────────────────────────────
+  {
+    emojis: "🚢 ❤️",
+    answer: "Titanic",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Directed by James Cameron",
+      "Based on a real-life disaster in 1912",
+      "Stars Leonardo DiCaprio and Kate Winslet",
+      "One word",
+    ],
+  },
+  {
+    emojis: "⭐ ⚔️ 🚀",
+    answer: "Star Wars",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Iconic sci-fi space opera",
+      "Created by George Lucas",
+      "Features Jedi and the Force",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "⚡ 🧙",
+    answer: "Harry Potter",
+    category: "Movie",
+    image: "https://upload.wikimedia.org/wikipedia/en/b/bf/Harry_Potter_and_the_Sorcerer%27s_Stone.jpg",
+    hints: [
+      "It's a Movie",
+      "Fantasy film series",
+      "Based on J.K. Rowling's novels",
+      "Set at Hogwarts School of Witchcraft and Wizardry",
+      "Two words — a person's name",
+    ],
+  },
+  {
+    emojis: "🦇 🌆",
+    answer: "The Dark Knight",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Superhero film directed by Christopher Nolan",
+      "Features the Joker as the villain",
+      "Stars Christian Bale as Batman",
+      "Three words",
+    ],
+  },
+  {
+    emojis: "😴 🌀",
+    answer: "Inception",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Directed by Christopher Nolan",
+      "Stars Leonardo DiCaprio",
+      "Characters enter people's dreams to steal ideas",
+      "One word",
+    ],
+  },
+  {
+    emojis: "💊 🖥️",
+    answer: "The Matrix",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Sci-fi action film from 1999",
+      "Stars Keanu Reeves",
+      "Reality is a simulated computer program",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🦖 🏝️",
+    answer: "Jurassic Park",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Directed by Steven Spielberg",
+      "Based on Michael Crichton's novel",
+      "Scientists bring dinosaurs back to life",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🏠 😱 👦",
+    answer: "Home Alone",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Classic Christmas comedy from 1990",
+      "Stars Macaulay Culkin",
+      "A boy is accidentally left behind when his family goes on holiday",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🧅 🐉",
+    answer: "Shrek",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated DreamWorks film",
+      "Features a green ogre as the hero",
+      "Set in the fairy-tale land of Far Far Away",
+      "One word",
+    ],
+  },
+  {
+    emojis: "🏃 🍫",
+    answer: "Forrest Gump",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Released in 1994",
+      "Stars Tom Hanks",
+      "Famous line: 'Life is like a box of chocolates'",
+      "Two words — a person's name",
+    ],
+  },
+  {
+    emojis: "🏠 🎈 👴",
+    answer: "Up",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Pixar film from 2009",
+      "An old man floats his house away using balloons",
+      "He befriends a young boy scout",
+      "One word, two letters",
+    ],
+  },
+  {
+    emojis: "🤠 🚀",
+    answer: "Toy Story",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "First Pixar feature film (1995)",
+      "Toys come to life when humans aren't watching",
+      "Features Woody and Buzz Lightyear",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🛡️ 🔨 ⚡",
+    answer: "The Avengers",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Marvel superhero ensemble film",
+      "Iron Man, Thor, Hulk and others team up",
+      "Released in 2012",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🐆 👑",
+    answer: "Black Panther",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Marvel superhero film",
+      "Set in the fictional African kingdom of Wakanda",
+      "Stars Chadwick Boseman",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🌊 👸",
+    answer: "Moana",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Disney film",
+      "Set in ancient Polynesia",
+      "A brave girl sets sail to save her island",
+      "One word — a person's name",
+    ],
+  },
+  {
+    emojis: "💀 🎸",
+    answer: "Coco",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Pixar film",
+      "Set during Mexico's Day of the Dead",
+      "A boy travels to the Land of the Dead to find his great-great-grandfather",
+      "One word",
+    ],
+  },
+  {
+    emojis: "🧠 😊 😢",
+    answer: "Inside Out",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Pixar film from 2015",
+      "Set inside a young girl's mind",
+      "The main characters are her emotions: Joy, Sadness, Fear, Anger, Disgust",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🐼 🥋",
+    answer: "Kung Fu Panda",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated DreamWorks film",
+      "An unlikely hero must become a martial arts master",
+      "Stars Jack Black as the voice of Po",
+      "Three words",
+    ],
+  },
+  {
+    emojis: "🦾 ❤️",
+    answer: "Iron Man",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Marvel superhero film",
+      "Started the Marvel Cinematic Universe in 2008",
+      "Stars Robert Downey Jr.",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🛡️ ⭐",
+    answer: "Captain America",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Marvel superhero film",
+      "Set partly during World War II",
+      "Stars Chris Evans as Steve Rogers",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🤖 🌱",
+    answer: "WALL-E",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Pixar film from 2008",
+      "Set in a future where Earth is covered in trash",
+      "A small waste-collecting robot falls in love",
+      "One word — all caps",
+    ],
+  },
+  {
+    emojis: "🐭 👨‍🍳 🇫🇷",
+    answer: "Ratatouille",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Pixar film",
+      "Set in Paris, France",
+      "A rat dreams of becoming a gourmet chef",
+      "One word — a French dish",
+    ],
+  },
+  {
+    emojis: "🌹 👹 👸",
+    answer: "Beauty and the Beast",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Classic Disney animated film",
+      "A prince is cursed to live as a hideous beast",
+      "A young woman named Belle befriends him",
+      "Four words",
+    ],
+  },
+  {
+    emojis: "🧞 🪔",
+    answer: "Aladdin",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "Animated Disney film set in Agrabah",
+      "A street thief discovers a magic lamp",
+      "Features the Genie voiced by Robin Williams",
+      "One word",
+    ],
+  },
+  {
+    emojis: "⏱️ 💎 🧤",
+    answer: "Avengers Endgame",
+    category: "Movie",
+    hints: [
+      "It's a Movie",
+      "The conclusion to the Marvel Infinity Saga",
+      "The heroes travel through time to collect the Infinity Stones",
+      "Released in 2019 — one of the highest-grossing films ever",
+      "Two words",
+    ],
+  },
+
+  // ── TV SHOWS ─────────────────────────────────────────────────────────────
+  {
+    emojis: "🧪 💰",
+    answer: "Breaking Bad",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "Award-winning drama series on AMC",
+      "A chemistry teacher turns to crime",
+      "Set in Albuquerque, New Mexico",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🐉 👑",
+    answer: "Game of Thrones",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "Epic fantasy series on HBO",
+      "Based on George R.R. Martin's novels",
+      "Noble families battle for control of the Iron Throne",
+      "Three words",
+    ],
+  },
+  {
+    emojis: "☕ 🛋️ 👫",
+    answer: "Friends",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "Iconic American sitcom from the 90s",
+      "Six friends navigate life in New York City",
+      "They hang out at Central Perk coffee shop",
+      "One word",
+    ],
+  },
+  {
+    emojis: "🔦 👾 🌲",
+    answer: "Stranger Things",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "Netflix sci-fi horror series",
+      "Set in the 1980s in a small Indiana town",
+      "A group of kids encounter supernatural forces",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "📋 😂 🏢",
+    answer: "The Office",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "American mockumentary sitcom",
+      "Set at the Dunder Mifflin paper company",
+      "Stars Steve Carell as an awkward regional manager",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🦑 🎮",
+    answer: "Squid Game",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "South Korean Netflix series",
+      "Contestants play deadly children's games for prize money",
+      "Became a global phenomenon in 2021",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🍩 👨‍👩‍👧‍👦 📺",
+    answer: "The Simpsons",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "Longest-running American animated series",
+      "Set in the fictional town of Springfield",
+      "Follows a yellow-skinned dysfunctional family",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🧟 🌍 🔫",
+    answer: "The Walking Dead",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "Post-apocalyptic horror series on AMC",
+      "Survivors navigate a world overrun by the undead",
+      "Based on a comic book series",
+      "Three words",
+    ],
+  },
+  {
+    emojis: "🏥 ❤️ 🩺",
+    answer: "Grey's Anatomy",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "Long-running medical drama on ABC",
+      "Set at Grey Sloan Memorial Hospital in Seattle",
+      "Follows surgical interns and their personal lives",
+      "Two words — a person's name + a body science",
+    ],
+  },
+  {
+    emojis: "📱 😰 🪞",
+    answer: "Black Mirror",
+    category: "TV Show",
+    hints: [
+      "It's a TV Show",
+      "British anthology series on Netflix",
+      "Each episode explores dark sides of technology",
+      "Created by Charlie Brooker",
+      "Two words",
+    ],
+  },
+
+  // ── SONGS ────────────────────────────────────────────────────────────────
+  {
+    emojis: "👑 🎭 🎸",
+    answer: "Bohemian Rhapsody",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By the rock band Queen",
+      "Released in 1975",
+      "A six-minute operatic rock ballad",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🧟 🎃 🕺",
+    answer: "Thriller",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By Michael Jackson",
+      "Released in 1982",
+      "Famous for its horror-themed music video",
+      "One word",
+    ],
+  },
+  {
+    emojis: "🐴 🛣️",
+    answer: "Old Town Road",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By Lil Nas X",
+      "A country-rap crossover hit",
+      "Broke the record for most weeks at number one on the Billboard Hot 100",
+      "Three words",
+    ],
+  },
+  {
+    emojis: "🌊 🔥 💔",
+    answer: "Rolling in the Deep",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By Adele",
+      "From her album '21' (2010)",
+      "A powerful breakup anthem",
+      "Four words",
+    ],
+  },
+  {
+    emojis: "💡 🌃 🏃",
+    answer: "Blinding Lights",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By The Weeknd",
+      "Released in 2019",
+      "Has an 80s synth-pop sound",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🎵 😊 ☀️",
+    answer: "Happy",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By Pharrell Williams",
+      "Featured in the Despicable Me 2 soundtrack",
+      "Won the Academy Award for Best Original Song",
+      "One word",
+    ],
+  },
+  {
+    emojis: "🦈 👶",
+    answer: "Baby Shark",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By Pinkfong",
+      "A children's song that became a viral sensation",
+      "The most-viewed YouTube video of all time",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "💃 🇵🇷 🎶",
+    answer: "Despacito",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By Luis Fonsi featuring Daddy Yankee",
+      "A Latin pop and reggaeton song",
+      "One of the most-streamed songs on Spotify ever",
+      "One word — Spanish for 'slowly'",
+    ],
+  },
+  {
+    emojis: "📱 💃 🌙",
+    answer: "Hotline Bling",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By Drake",
+      "Released in 2015",
+      "Famous for its meme-worthy music video dance moves",
+      "Two words",
+    ],
+  },
+  {
+    emojis: "🎵 ❤️‍🔥 💪",
+    answer: "Shape of You",
+    category: "Song",
+    hints: [
+      "It's a Song",
+      "By Ed Sheeran",
+      "From his album '÷' (Divide)",
+      "One of the best-selling singles of all time",
+      "Three words",
+    ],
+  },
+
+  // ── PHRASES ──────────────────────────────────────────────────────────────
+  {
+    emojis: "🦵 💥",
+    answer: "Break a Leg",
+    category: "Phrase",
+    hints: [
+      "It's a Phrase",
+      "Commonly used in the performing arts",
+      "Said to someone before they go on stage",
+      "Means 'good luck' — but you'd never say that directly",
+      "Three words",
+    ],
+  },
+  {
+    emojis: "🌧️ 🐱 🐶",
+    answer: "Raining Cats and Dogs",
+    category: "Phrase",
+    hints: [
+      "It's a Phrase",
+      "An English idiom about weather",
+      "Nothing to do with actual animals",
+      "Means it is raining very heavily",
+      "Four words",
+    ],
+  },
+  {
+    emojis: "🎂 ✂️",
+    answer: "Piece of Cake",
+    category: "Phrase",
+    hints: [
+      "It's a Phrase",
+      "An English idiom",
+      "Has nothing to do with baking",
+      "Used when something is very easy to do",
+      "Three words",
+    ],
+  },
+  {
+    emojis: "🔨 💡",
+    answer: "Hit the Nail on the Head",
+    category: "Phrase",
+    hints: [
+      "It's a Phrase",
+      "An English idiom",
+      "Related to carpentry — but not literally",
+      "Means someone described or identified something exactly correctly",
+      "Seven words",
+    ],
+  },
+  {
+    emojis: "🐝 🦴",
+    answer: "Busy as a Bee",
+    category: "Phrase",
+    hints: [
+      "It's a Phrase",
+      "An English idiom about work ethic",
+      "Comparing someone to an insect",
+      "Means someone is very active and hardworking",
+      "Four words",
+    ],
+  },
+];
+
+/**
+ * Returns today's puzzle based on the current date.
+ * Everyone on the same calendar day gets the same puzzle.
+ */
+function getPuzzleOfDay() {
+  const now = new Date();
+  const start = new Date(2024, 0, 1); // Jan 1 2024 — epoch for puzzle numbering
+  const diffDays = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  return PUZZLES[diffDays % PUZZLES.length];
+}
+
+/**
+ * Returns a date string "YYYY-MM-DD" for today — used as a localStorage key.
+ */
+function getTodayKey() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+}

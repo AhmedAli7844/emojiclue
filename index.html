@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EmojiClue — Daily emoji puzzle on BIGZY Games. Decode the emojis and guess the movie, show, or song. New puzzle every day." />
+  <title>EmojiClue — BIGZY Games</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+
+  <!-- Open Graph (link previews on iMessage, WhatsApp, Twitter, etc.) -->
+  <meta property="og:title" content="EmojiClue — Daily Emoji Puzzle" />
+  <meta property="og:description" content="Decode the emojis and guess the movie, show, or song. New puzzle every day on BIGZY Games." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bigzygames.com" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="EmojiClue — Daily Emoji Puzzle" />
+  <meta name="twitter:description" content="Decode the emojis and guess the movie, show, or song. New puzzle every day." />
+  <meta name="theme-color" content="#10b981" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="stylesheet" href="css/intro.css" />
+</head>
+<body>
+
+  <!-- ── Intro Screen ──────────────────────────────────────────────────── -->
+  <div id="intro-screen">
+    <div class="intro-content">
+
+      <div class="intro-logo">
+        <img src="logo.svg" alt="BIGZY Games" />
+        <span>BIGZY</span>
+      </div>
+
+      <div class="intro-emojis" id="intro-emojis">🎬</div>
+
+      <h1 class="intro-title">EmojiClue</h1>
+      <p class="intro-sub">Decode the emojis. Guess the movie, show, or song.<br>A brand new challenge every single day.</p>
+
+      <button class="intro-play-btn" onclick="dismissIntro()">
+        Play Today's Puzzle
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <p class="intro-streak" id="intro-streak"></p>
+
+    </div>
+  </div>
+
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header>
+    <a class="logo-wrap" href="#">
+      <img src="logo.svg" alt="BIGZY Games" class="logo-icon" />
+      <span class="logo-text">
+        <span class="logo-name">BIGZY</span>
+        <span class="logo-sub">EmojiClue</span>
+      </span>
+    </a>
+
+    <div class="header-right">
+      <span class="puzzle-number" id="puzzle-number">Daily Puzzle</span>
+
+      <!-- Shown when NOT signed in -->
+      <button class="sign-up-btn" id="header-sign-up" onclick="showAuthModal('signup')">Sign up free</button>
+      <button class="sign-in-btn" id="header-sign-in" onclick="showAuthModal('signin')">Sign in</button>
+
+      <!-- Shown when signed in — click to open dropdown -->
+      <button class="user-btn hidden" id="user-btn" onclick="toggleDropdown()"></button>
+    </div>
+  </header>
+
+  <!-- User dropdown -->
+  <div class="user-dropdown hidden" id="user-dropdown">
+    <p class="dropdown-email" id="dropdown-email"></p>
+    <button class="dropdown-btn danger" onclick="handleSignOut()">Sign out</button>
+  </div>
+
+  <!-- ── Main Game ──────────────────────────────────────────────────────── -->
+  <main>
+
+    <div class="emoji-card">
+      <span class="category-tag" id="category-tag"></span>
+      <span id="emoji-display" role="img" aria-label="Today's emoji clue">🎮</span>
+    </div>
+
+    <div class="input-row">
+      <input
+        type="text"
+        id="guess-input"
+        placeholder="What does it represent?"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+        maxlength="100"
+        aria-label="Enter your guess"
+      />
+      <button id="submit-btn">Guess</button>
+    </div>
+
+    <div class="attempts-bar" aria-live="polite">
+      <span id="attempts-left">6</span>&nbsp;attempts left
+    </div>
+
+    <hr class="sep" />
+
+    <section aria-label="Your guesses">
+      <p class="section-label">Your guesses</p>
+      <ul id="guesses-list" aria-live="polite"></ul>
+    </section>
+
+    <hr class="sep" />
+
+    <section aria-label="Hints">
+      <p class="section-label">Hints</p>
+      <div id="hints-container" aria-live="polite"></div>
+    </section>
+
+    <div class="signup-nudge" id="signup-nudge">
+      <span>🔥 Sign up free to save your streak and compete daily</span>
+      <button class="signup-nudge-btn" onclick="showAuthModal('signup')">Create account</button>
+      <button class="signup-nudge-close" onclick="document.getElementById('signup-nudge').remove()" aria-label="Dismiss">✕</button>
+    </div>
+
+  </main>
+
+  <!-- ── Game Result Modal ─────────────────────────────────────────────── -->
+  <div
+    id="result-modal"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-hidden="true"
+  >
+    <div class="modal">
+      <h2 class="modal-title" id="modal-title"></h2>
+      <p id="modal-answer"></p>
+      <hr class="modal-sep" />
+      <div id="modal-stats"></div>
+      <div class="modal-actions">
+        <button class="btn-share" onclick="shareResult()">Share with Friends</button>
+        <button class="btn-close" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Auth Modal ────────────────────────────────────────────────────── -->
+  <div
+    id="auth-modal"
+    class="hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Sign in to EmojiClue"
+    aria-hidden="true"
+  >
+    <div class="auth-card">
+
+      <div class="auth-header">
+        <div class="auth-logo">
+          <img src="logo.svg" alt="BIGZY Games" />
+          <span class="auth-logo-name">BIGZY</span>
+        </div>
+        <h2>Welcome back</h2>
+        <p class="auth-desc">Sign in to track your streak and compete daily.</p>
+      </div>
+
+      <!-- Error / success banner -->
+      <div id="auth-error" class="hidden"></div>
+
+      <!-- Dynamic body (tabs, fields, buttons rendered by auth.js) -->
+      <div id="auth-body"></div>
+
+      <button class="auth-skip-btn" onclick="hideAuthModal()">Skip for now — just play</button>
+
+    </div>
+  </div>
+
+  <!-- ── Toast ──────────────────────────────────────────────────────────── -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ── Firebase SDK ───────────────────────────────────────────────────── -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <!-- ── Game Scripts ───────────────────────────────────────────────────── -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/puzzles.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    // Puzzle number in header
+    (function () {
+      const diff = Math.floor((new Date() - new Date(2024, 0, 1)) / 864e5);
+      const total = typeof PUZZLES !== "undefined" ? PUZZLES.length : 30;
+      document.getElementById("puzzle-number").textContent =
+        "#" + ((diff % total) + 1);
+    })();
+
+    // ── Intro screen ──────────────────────────────────────────────────────
+    (function () {
+      // Cycle through emoji clues on the intro screen
+      const previews = ["🎬","🦁👑","🚢❤️","🦇🌆","🧙💍","🐠🔍","💭🌀","🦕🏝️","🤠🚀","👻🏚️"];
+      let idx = 0;
+      const emojiEl = document.getElementById("intro-emojis");
+      setInterval(() => {
+        if (!emojiEl) return;
+        emojiEl.classList.add("swap");
+        setTimeout(() => {
+          idx = (idx + 1) % previews.length;
+          emojiEl.textContent = previews[idx];
+          emojiEl.classList.remove("swap");
+        }, 200);
+      }, 1800);
+
+      // Show streak on intro if returning player
+      const stats = (() => {
+        try { return JSON.parse(localStorage.getItem("bigzy_stats")) || {}; } catch { return {}; }
+      })();
+      const streakEl = document.getElementById("intro-streak");
+      if (streakEl && stats.streak > 1) {
+        streakEl.textContent = "🔥 " + stats.streak + "-day streak — keep it going!";
+      } else if (streakEl && stats.played > 0) {
+        streakEl.textContent = "Welcome back! Puzzle #" +
+          (Math.floor((new Date() - new Date(2024,0,1)) / 864e5) % (typeof PUZZLES !== "undefined" ? PUZZLES.length : 30) + 1) + " is waiting.";
+      }
+    })();
+
+    function dismissIntro() {
+      const screen = document.getElementById("intro-screen");
+      screen.classList.add("fade-out");
+      setTimeout(() => screen.remove(), 600);
+    }
+
+    // User dropdown toggle
+    function toggleDropdown() {
+      const dd = document.getElementById("user-dropdown");
+      const user = auth.currentUser;
+      if (user) {
+        const emailEl = document.getElementById("dropdown-email");
+        if (emailEl) emailEl.textContent = user.email || user.displayName || "";
+      }
+      dd.classList.toggle("hidden");
+    }
+
+    // Close dropdown on outside click
+    document.addEventListener("click", (e) => {
+      const dd = document.getElementById("user-dropdown");
+      const btn = document.getElementById("user-btn");
+      if (!dd.contains(e.target) && e.target !== btn) {
+        dd.classList.add("hidden");
+      }
+    });
+  </script>
+
+</body>
+</html>
