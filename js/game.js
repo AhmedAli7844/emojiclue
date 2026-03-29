@@ -227,17 +227,7 @@ function copyToClipboard(text) {
 }
 
 function buildShareText() {
-  const puzzleIndex = getTodayPuzzleIndex();
-  const attemptsUsed = state.guesses.length;
-  const won = state.result === "win";
-
-  const squares = state.guesses.map((g) =>
-    normalizeStr(g) === normalizeStr(puzzle.answer) ? "🟩" : "🟥"
-  ).join("");
-
-  const score = won ? `${attemptsUsed}/${MAX_ATTEMPTS}` : `X/${MAX_ATTEMPTS}`;
-
-  return `EmojiClue #${puzzleIndex + 1} ${score}\n${puzzle.emojis}\n${squares}\nPlay at https://emojiclue.vercel.app`;
+  return `https://emojiclue.vercel.app`;
 }
 
 function fallbackCopy(text) {
