@@ -237,7 +237,7 @@ function buildShareText() {
 
   const score = won ? `${attemptsUsed}/${MAX_ATTEMPTS}` : `X/${MAX_ATTEMPTS}`;
 
-  return `EmojiClue #${puzzleIndex + 1} ${score}\n${puzzle.emojis}\n${squares}\nhttps://emojiclue.vercel.app`;
+  return `EmojiClue #${puzzleIndex + 1} ${score}\n${puzzle.emojis}\n${squares}\nPlay at https://emojiclue.vercel.app`;
 }
 
 function fallbackCopy(text) {
