@@ -29,6 +29,7 @@
 
   <!-- ── Intro Screen ──────────────────────────────────────────────────── -->
   <div id="intro-screen">
+    <div class="intro-bg-paths" id="intro-bg-paths"></div>
     <div class="intro-content">
 
       <div class="intro-logo">
@@ -38,11 +39,11 @@
 
       <div class="intro-emojis" id="intro-emojis">🎬</div>
 
-      <h1 class="intro-title">EmojiClue</h1>
+      <h1 class="intro-title" id="intro-title">EmojiClue</h1>
       <p class="intro-sub">Decode the emojis. Guess the movie, show, or song.<br>A brand new challenge every single day.</p>
 
       <button class="intro-play-btn" onclick="dismissIntro()">
-        Play Today's Puzzle
+        Play Now
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -249,6 +250,59 @@
       }
       dd.classList.toggle("hidden");
     }
+
+    // ── Animated background paths ─────────────────────────────────────────
+    (function () {
+      const container = document.getElementById("intro-bg-paths");
+      if (!container) return;
+      const ns = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(ns, "svg");
+      svg.setAttribute("viewBox", "0 0 696 316");
+      svg.setAttribute("fill", "none");
+      svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+      svg.style.cssText = "width:100%;height:100%;";
+
+      [1, -1].forEach(function (position) {
+        for (var i = 0; i < 36; i++) {
+          var x0 = -(380 - i * 5 * position);
+          var y0 = -(189 + i * 6);
+          var x1 = -(312 - i * 5 * position);
+          var y1 = 216 - i * 6;
+          var x2 = 152 - i * 5 * position;
+          var y2 = 343 - i * 6;
+          var x3 = 616 - i * 5 * position;
+          var y3 = 470 - i * 6;
+          var x4 = 684 - i * 5 * position;
+          var y4 = 875 - i * 6;
+          var d = "M" + x0 + " " + y0 +
+            "C" + x0 + " " + y0 + " " + x1 + " " + y1 + " " + x2 + " " + y2 +
+            "C" + x3 + " " + y3 + " " + x4 + " " + y4 + " " + x4 + " " + y4;
+          var path = document.createElementNS(ns, "path");
+          path.setAttribute("d", d);
+          path.setAttribute("stroke", "rgba(16,185,129,1)");
+          path.setAttribute("stroke-width", String(0.5 + i * 0.03));
+          path.setAttribute("pathLength", "1");
+          path.setAttribute("stroke-dasharray", "0.35 0.65");
+          path.setAttribute("stroke-opacity", String(0.08 + i * 0.018));
+          var dur = (20 + Math.random() * 12).toFixed(1);
+          var delay = (-Math.random() * 20).toFixed(1);
+          path.style.animation = "intro-path-flow " + dur + "s " + delay + "s linear infinite";
+          svg.appendChild(path);
+        }
+      });
+      container.appendChild(svg);
+    })();
+
+    // ── Letter-by-letter title animation ─────────────────────────────────
+    (function () {
+      var title = document.getElementById("intro-title");
+      if (!title) return;
+      var text = title.textContent;
+      title.innerHTML = text.split("").map(function (ch, i) {
+        if (ch === " ") return '<span style="display:inline-block;width:0.3em">&nbsp;</span>';
+        return '<span class="intro-letter" style="animation-delay:' + (i * 0.045) + 's">' + ch + '</span>';
+      }).join("");
+    })();
 
     // Close dropdown on outside click
     document.addEventListener("click", (e) => {
