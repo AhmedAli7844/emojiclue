@@ -227,7 +227,18 @@ function copyToClipboard(text) {
 }
 
 function buildShareText() {
-  return `https://emojiclue.vercel.app`;
+  const diff = Math.floor((new Date() - new Date(2024, 0, 1)) / 864e5);
+  const puzzleNum = (diff % PUZZLES.length) + 1;
+  const won = state.result === "win";
+  const attempts = state.guesses.length;
+
+  const squares = state.guesses.map((_, i) =>
+    won && i === attempts - 1 ? "🟩" : "🟥"
+  ).join("") + "⬜".repeat(MAX_ATTEMPTS - attempts);
+
+  const resultLine = won ? `${attempts}/${MAX_ATTEMPTS} ✅` : `X/${MAX_ATTEMPTS} ❌`;
+
+  return `EmojiClue #${puzzleNum} — ${resultLine}\n${puzzle.emojis}\n${squares}\nhttps://emojiclue.vercel.app`;
 }
 
 function fallbackCopy(text) {
